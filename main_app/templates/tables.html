@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends 'templates/base.html' %}
+    
+    {% block body_block %}
+    <table class="table">
+        <thead class="th-dark">
+            <tr>
+                <th scope="col">Student ID</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Friend 1</th>
+                <th scope="col">Friend 2</th>
+                <th scope="col">Friend 3</th>
+                <th scope="col">Total Friends</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for k,v in tables.items %}
+                <tr>
+                    <td scope="row">
+                        {{ k }}
+                    </td>
+                    <td>
+                        {{ v.0 }}
+                    </td>
+                    <td>
+                        {{ v.1 }}
+                    </td>
+                    <td>
+                        {{ v.2 }}
+                    </td>
+                    <td>
+                        {{ v.3 }}
+                    </td>
+                    <td>
+                        {{ v.4 }}
+                    </td>
+                </tr>
+                
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock body_block %}
+
+  
+    

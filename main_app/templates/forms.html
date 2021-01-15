@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+{% extends 'templates/base.html' %}
+    
+    {% block body_block %}
+        <form action="/forms/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    {% endblock body_block %}
