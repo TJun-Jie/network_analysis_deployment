@@ -14,7 +14,6 @@ import os
 from pathlib import Path
 import django_heroku
 
-django_heroku.settings(locals())
 
 
 env = environ.Env()
@@ -127,4 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT =BASE_DIR.joinpath("staticfiles")
+STATIC_URL = "/static/"
+
+django_heroku.settings(locals())
