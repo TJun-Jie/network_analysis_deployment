@@ -23,13 +23,14 @@ def add_student(N=10):
 # every student will choose the popular student as their friend (except the popular student himself)
 # other than that the student will choose his own friend
 def add_friendship():
-    # number_of_students = Student.objects.all().count()
-    number_of_students = 40
+    all_students = Student.objects.all()
+    first_student_id = all_students[0].id
+    number_of_students = all_students.count()
 
-    popular_kid_id = 23
+    popular_kid_id = first_student_id + 10
     popular_kid = Student.objects.get(pk=popular_kid_id)
 
-    for i in range(1, 1 + number_of_students ):
+    for i in range(first_student_id, first_student_id + number_of_students ):
         student = Student.objects.get(pk=i)
         if(student):
             # add popular kid as friend 
@@ -38,7 +39,7 @@ def add_friendship():
                 friendship.save()
 
                 # List of random numbers without popular kid and student
-                my_list = list(x for x in range(1, 1 + number_of_students +1) if x not in [popular_kid_id,i])
+                my_list = list(x for x in range(first_student_id, first_student_id+ number_of_students ) if x not in [popular_kid_id,i])
                 random.shuffle(my_list)
 
                 # Add random friend 1
@@ -54,7 +55,7 @@ def add_friendship():
             # if the student is the popular kid, then add some random guy
             else:
                  # List of random numbers without popular kid and student
-                my_list = list(x for x in range(1, 1 + number_of_students +1) if x not in [i])
+                my_list = list(x for x in range(first_student_id, first_student_id + number_of_students ) if x not in [i])
                 random.shuffle(my_list)
 
                 # Add random friend 1
@@ -74,6 +75,7 @@ def add_friendship():
 
 def show_students():
     number_of_students = Student.objects.all()
+    print(number_of_students[0].id)
     for student in number_of_students:
         print(student.id)
     print("Total number:" , number_of_students.count())
