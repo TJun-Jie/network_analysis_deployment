@@ -29,7 +29,7 @@ SECRET_KEY = '*d)gky6@j^&j1ug5&56%h(6sfdst&%y#bqal5r#_x3_*b3b%nv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['network-analysis-class-dev2.ap-southeast-1.elasticbeanstalk.com']
 
 
 # Application definition
