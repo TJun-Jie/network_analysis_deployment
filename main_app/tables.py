@@ -14,7 +14,7 @@ def num_friends(student_object):
     return count
 
 def create_table():
-    if(db_table_exists('friendship_table')):
+    if(db_table_exists('main_app_friendship1')):
         table_context ={}
         # Create tables for student,friend 1-3
         for entry in Friendship1.objects.all():

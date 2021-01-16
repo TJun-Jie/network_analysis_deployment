@@ -14,7 +14,7 @@ def db_table_exists(table_name):
 
 
 def create_graph():   
-    if(db_table_exists('student_table') and db_table_exists('friendship_table')):
+    if(db_table_exists('main_app_student') and db_table_exists('main_app_friendship1')):
         all_students = Student.objects.all()
         all_friendships  = Friendship1.objects.all()
 
