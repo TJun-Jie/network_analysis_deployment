@@ -29,7 +29,7 @@ SECRET_KEY = '*d)gky6@j^&j1ug5&56%h(6sfdst&%y#bqal5r#_x3_*b3b%nv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['network-analysis-class-dev2.ap-southeast-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['network-analysis-class-dev2.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
@@ -78,13 +78,26 @@ WSGI_APPLICATION = 'network_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -125,3 +138,8 @@ USE_TZ = True
 STATIC_ROOT =BASE_DIR.joinpath("staticfiles")
 STATIC_URL = "/static/"
 
+if 'AWS_ACCESS_KEY_ID' in os.environ:
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_KEY = os.environ['AWS_SECRET_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
