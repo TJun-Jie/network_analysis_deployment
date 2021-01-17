@@ -29,7 +29,7 @@ SECRET_KEY = '*d)gky6@j^&j1ug5&56%h(6sfdst&%y#bqal5r#_x3_*b3b%nv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['network-analysis-class-dev2.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
+ALLOWED_HOSTS = ['network-analysis-class-dev2.ap-southeast-1.elasticbeanstalk.com', 'network-analysis-class-dev.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'network_project.wsgi.application'
 
 
 
-if 'RDS_DB_NAME' in os.environ:
+if 'RDS_HOSTNAME' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -99,6 +99,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
