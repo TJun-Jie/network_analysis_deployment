@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import InputForm
+from .forms import InputForm, UserForm
 from .generateGraph import create_graph
 from .tables import create_table
 
@@ -54,3 +54,23 @@ def get_form(request):
 def tables(request):
     context_tables = {'tables':create_table()}
     return render(request, 'tables.html',context = context_tables)
+
+def register(request):
+    registration =False
+
+    if request.method =="POST":
+        user_form =UserForm(data=request.POST)
+
+        if user_form.is_valid():
+
+            user=user_form.save()
+            user.set_password(user.password)
+            user.save()
+        else:
+            print(user_form.errors)
+    else:
+        user_form = UserForm()
+
+    return render(request, 'main_app/registration.html',
+                            {'user_form':user_form,
+                            'registered':registered})
