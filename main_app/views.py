@@ -4,7 +4,6 @@ from django.urls import reverse
 from .forms import InputForm, UserForm
 from .generateGraph import create_graph
 from .tables import create_table
-
 from .models import Student, Friendship1
 
 
