@@ -38,6 +38,15 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'main_app:register' %}">Register</a>
             </li>
+            {% if user.is_authenticated %}
+              <li>
+                <a class="nav-link" href="{% url 'main_app:logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <li>
+                <a class="nav-link" href="{% url 'main_app:user_login' %}">Login</a>
+              </li>
+            {% endif %}
           </ul>
         </div>
       </nav>
