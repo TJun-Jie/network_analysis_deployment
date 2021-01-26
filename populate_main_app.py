@@ -9,14 +9,18 @@ django.setup()
 import random 
 from main_app.models import Student, Friendship1
 from faker import Faker
+from django.contrib.auth.models import User
 
 fakegen =Faker()
 # seed to generate 10 students
 def add_student(N=10):
     for entry in range(N):
-        student = fakegen.name()
-        
-        stu = Student.objects.get_or_create(name =student)[0]
+        fake_firstname = fakegen.first_name()
+        fake_lastname = fakegen.last_name()
+        fake_username = fake_firstname[:2]+fake_lastname[:-2]
+        fake_pass= 'password'
+
+        users = User.objects.get_or_create(username=fake_username,first_name=fake_firstname,last_name=fake_lastname,password=fake_pass)[0]
 
         
 # seed to add 2 friends for each student while selecting a popular kid
