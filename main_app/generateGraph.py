@@ -5,8 +5,8 @@ import networkx as nx
 import io
 import numpy as np
 
-from .models import Student, Friendship1
-
+from .models import  Friendship1
+from django.contrib.auth import get_user_model
 from django.db import connection
 
 def db_table_exists(table_name):
@@ -14,8 +14,9 @@ def db_table_exists(table_name):
 
 
 def create_graph():   
-    if(db_table_exists('main_app_student') and db_table_exists('main_app_friendship1')):
-        all_students = Student.objects.all()
+    if(db_table_exists('main_app_friendship1')):
+        User = get_user_model()
+        all_students = User.objects.all()
         all_friendships  = Friendship1.objects.all()
 
         G = nx.DiGraph()

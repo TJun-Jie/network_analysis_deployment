@@ -38,7 +38,7 @@ def get_form(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             data = form.cleaned_data
-            student = data['student']
+            student = request.user
             friend1 = data['friend1']
             friend2 = data['friend2']
             friend3 = data['friend3']
