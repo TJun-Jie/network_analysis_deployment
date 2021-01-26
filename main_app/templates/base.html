@@ -36,6 +36,8 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'main_app:tables' %}">Table</a>
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'main_app:graph' %}">Graph</a>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'main_app:register' %}">Register</a>
             </li>
             {% if user.is_authenticated %}

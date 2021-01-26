@@ -3,12 +3,13 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 from .forms import InputForm, UserForm
 from .generateGraph import create_graph
 from .tables import create_table
 from .models import Student, Friendship1
+from .decorators import allowed_users
 
 
 
@@ -21,6 +22,7 @@ def index(request):
 
 
 @login_required
+@allowed_users(allowed_roles=['admin'])
 def graph(request):
     context_dict = { 'data' : image_bytes}
     return render(request, 'graph.html', context_dict )
@@ -61,6 +63,8 @@ def get_form(request):
 
     return render(request, 'forms.html', {'form': form})
 
+@login_required
+@allowed_users(allowed_roles=['admin'])
 def tables(request):
     context_tables = {'tables':create_table()}
     return render(request, 'tables.html',context = context_tables)
