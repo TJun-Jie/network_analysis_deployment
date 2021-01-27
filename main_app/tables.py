@@ -11,21 +11,24 @@ def create_table():
         table_context ={}
         # Create tables for student,friend 1-3
         for entry in friends:
+            print("hi")
             if entry.student.id not in table_context.keys():
                 name_list=[]
-                name_list.append(entry.student.first_name + entry.student.last_name)
-                name_list.append(entry.friend.first_name + entry.student.last_name)
+                name_list.append(entry.student.first_name + " " + entry.student.last_name)
+                name_list.append(entry.friend.first_name + " " +entry.student.last_name)
                 table_context[entry.student.id]=name_list
             else:
-                table_context[entry.student.id].append(entry.friend.first_name + entry.student.last_name)
+                table_context[entry.student.id].append(entry.friend.first_name + " " + entry.student.last_name)
         # Create tables for number of friends of student
         number_of_friends = {}
         for entry in friends: 
-            if((entry.student.first_name + entry.student.last_name) not in number_of_friends):
+            if((entry.student.id) not in number_of_friends):
                 number_of_friends[entry.student.id] = 0
 
         for entry in friends:
-            number_of_friends[entry.friend.id] += 1
+            if((entry.student.id) not in number_of_friends):
+                # print(number_of_friends)
+                number_of_friends[entry.friend.id] += 1
 
         for key in number_of_friends:
             table_context[key].append(number_of_friends[key])
