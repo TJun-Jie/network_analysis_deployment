@@ -92,10 +92,16 @@ def show_students():
 def delete_all_friendships():
     delele_all_friendships = Friendship1.objects.all().delete()
     
+    
+
+def show_friend_with_id(id):
+    print(Friendship1.objects.filter(student__id = id))
+
 if __name__ =='__main__':
     print('populating script!')
     # add_student(40)
     # show_students()
     add_friendship()
     # delete_all_friendships()
+    # show_friend_with_id(30)
     print("Populating complete!")

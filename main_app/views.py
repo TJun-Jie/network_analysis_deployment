@@ -36,9 +36,9 @@ def get_form(request):
         form = InputForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
+            student = request.user
             # process the data in form.cleaned_data as required
             data = form.cleaned_data
-            student = request.user
             friend1 = data['friend1']
             friend2 = data['friend2']
             friend3 = data['friend3']
@@ -59,7 +59,17 @@ def get_form(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = InputForm()
+        student = request.user
+        friendships = Friendship1.objects.filter(student__id = student.id)
+        if(len(friendships) > 0):
+            dct = {
+                "friend1": friendships[0],
+                "friend2": friendships[1],
+                "friend3": friendships[2]
+            }
+        else:
+            dct = {}
+        form = InputForm(initial=dct)
 
     return render(request, 'forms.html', {'form': form})
 

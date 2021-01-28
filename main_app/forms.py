@@ -1,11 +1,9 @@
 from django import forms
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 
-class InputForm(forms.Form):
+class InputForm(forms.Form):    
     error_css_class = 'error'
-    UserModel = get_user_model()
-    users = UserModel.objects.all()
+    users = User.objects.all()
     friend1 = forms.ModelChoiceField(queryset=users.filter(is_staff=False).order_by('first_name'), required=True)
     friend2 = forms.ModelChoiceField(queryset=users.filter(is_staff=False).order_by('first_name'), required=True)
     friend3 = forms.ModelChoiceField(queryset=users.filter(is_staff=False).order_by('first_name'),required=True)
