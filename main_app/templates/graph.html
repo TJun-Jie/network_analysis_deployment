@@ -2,7 +2,25 @@
 {% extends 'templates/base.html' %}
     
     {% block body_block %}
-        {{ data | safe }}
-        <h1>Graph</h1>
+    <div class="card text-center">
+            <div class="card-header">
+                <h2 class="card-title">Network Analysis Graph</h2>                    
+            </div>
+            <div class="card-body">
+                {{ data | safe }}
+            </div>
+            <div class="card-footer">
+                <p>
+                    Number of Students: {{ number_of_students }}
+                </p>
+                <p>
+                    Number of Friendship Links: {{ number_of_friendship_links }}
+                </p>
+                <p>
+                    Most popular student: {{ most_popular_student_name }}
+                </p>
+            </div>
+
+    </div>
     {% endblock body_block %}
         

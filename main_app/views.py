@@ -10,7 +10,7 @@ from .generateGraph import create_graph
 from .tables import create_table
 from .models import Student, Friendship1
 from .decorators import allowed_users
-
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -24,7 +24,12 @@ def index(request):
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def graph(request):
-    context_dict = { 'data' : image_bytes}
+    number_of_students = User.objects.filter(is_staff=False).count()
+    number_of_friendship_links = Friendship1.objects.all().count()
+    number_of_friends = {}
+    most_popular_student = get_most_popular_student()
+    print(most_popular_student)
+    context_dict = { 'data' : image_bytes, 'number_of_students': number_of_students, 'number_of_friendship_links': number_of_friendship_links, "most_popular_student_name": most_popular_student.first_name + " " + most_popular_student.last_name}
     return render(request, 'graph.html', context_dict )
 
 
@@ -138,3 +143,23 @@ def user_logout(request):
     logout(request)
     # Return to homepage.
     return HttpResponseRedirect(reverse('main_app:index'))
+
+
+def get_most_popular_student():
+    friends = Friendship1.objects.all()
+    number_of_friends = {}
+    highest_id = 0
+    highest_number = 0
+
+    for entry in friends: 
+        if((entry.student.id) not in number_of_friends):
+            number_of_friends[entry.student.id] = 0
+
+    for entry in friends:
+            # print(number_of_friends)
+            number_of_friends[entry.friend.id] += 1
+    for key in number_of_friends:
+        if(number_of_friends[key] > highest_number):
+            highest_id = key
+            highest_number = number_of_friends[key]
+    return User.objects.get(pk=highest_id)
