@@ -163,3 +163,6 @@ def get_most_popular_student():
             highest_id = key
             highest_number = number_of_friends[key]
     return User.objects.get(pk=highest_id)
+
+def unauthorised(request):
+    return render(request, 'unauthorised.html' )
