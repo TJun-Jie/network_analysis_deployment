@@ -6,9 +6,9 @@ class InputForm(forms.Form):
     error_css_class = 'error'
     UserModel = get_user_model()
     users = UserModel.objects.all()
-    friend1 = forms.ModelChoiceField(queryset=users.order_by('first_name'), required=True)
-    friend2 = forms.ModelChoiceField(queryset=users.order_by('first_name'), required=True)
-    friend3 = forms.ModelChoiceField(queryset=users.order_by('first_name'),required=True)
+    friend1 = forms.ModelChoiceField(queryset=users.filter(is_staff=False).order_by('first_name'), required=True)
+    friend2 = forms.ModelChoiceField(queryset=users.filter(is_staff=False).order_by('first_name'), required=True)
+    friend3 = forms.ModelChoiceField(queryset=users.filter(is_staff=False).order_by('first_name'),required=True)
 
     def clean(self):
         all_clean_data = super().clean()
