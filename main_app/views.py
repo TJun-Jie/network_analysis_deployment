@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -138,3 +138,6 @@ def user_logout(request):
     logout(request)
     # Return to homepage.
     return HttpResponseRedirect(reverse('main_app:index'))
+
+def unauthorised(request):
+    return redirect('/unauthorised/')
