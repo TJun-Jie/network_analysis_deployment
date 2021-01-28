@@ -6,23 +6,23 @@ import io
 import numpy as np
 
 from .models import  Friendship1
-from django.contrib.auth import get_user_model
 from django.db import connection
 
+from django.contrib.auth.models import User
 def db_table_exists(table_name):
     return table_name in connection.introspection.table_names()
 
 
 def create_graph():   
     if(db_table_exists('main_app_friendship1')):
-        User = get_user_model()
         all_students = User.objects.all()
         all_friendships  = Friendship1.objects.all()
 
         G = nx.DiGraph()
 
         for student in all_students:
-            G.add_node(student.id)
+            if( not student.groups.filter(name="admin").exists()):
+                G.add_node(student.id)
         for friendship in all_friendships:
             G.add_edge(friendship.student.id, friendship.friend.id)
 

@@ -27,16 +27,17 @@ def add_student(N=10):
 # every student will choose the popular student as their friend (except the popular student himself)
 # other than that the student will choose his own friend
 def add_friendship():
-    all_students = Student.objects.all()
+    all_students = User.objects.filter(is_staff=False)
     first_student_id = all_students[0].id
     number_of_students = all_students.count()
 
     popular_kid_id = first_student_id + 10
-    popular_kid = Student.objects.get(pk=popular_kid_id)
+    popular_kid = User.objects.get(pk=popular_kid_id)
 
     for i in range(first_student_id, first_student_id + number_of_students ):
-        student = Student.objects.get(pk=i)
-        if(student):
+        student = User.objects.get(pk=i)
+        if( not student.groups.filter(name="admin").exists() and student):
+
             # add popular kid as friend 
             if( i != popular_kid_id):
                 friendship  = Friendship1( student = student, friend = popular_kid)
@@ -47,12 +48,12 @@ def add_friendship():
                 random.shuffle(my_list)
 
                 # Add random friend 1
-                r_friend =Student.objects.get(pk=my_list[-1])
+                r_friend =User.objects.get(pk=my_list[-1])
                 friendship  = Friendship1( student = student, friend = r_friend)
                 friendship.save()
 
                 # Add random friend 2
-                r_friend2 =Student.objects.get(pk=my_list[-2])
+                r_friend2 =User.objects.get(pk=my_list[-2])
                 friendship  = Friendship1(student = student, friend = r_friend2)
                 friendship.save()
 
@@ -63,35 +64,38 @@ def add_friendship():
                 random.shuffle(my_list)
 
                 # Add random friend 1
-                r_friend =Student.objects.get(pk=my_list[-1])
+                r_friend =User.objects.get(pk=my_list[-1])
                 friendship  = Friendship1( student = student, friend = r_friend)
                 friendship.save()
 
                 # Add random friend 2
-                r_friend2 =Student.objects.get(pk=my_list[-2])
+                r_friend2 =User.objects.get(pk=my_list[-2])
                 friendship  = Friendship1(student = student, friend = r_friend2)
                 friendship.save()
 
                 # Add random friend 3
-                r_friend3 =Student.objects.get(pk=my_list[-3])
+                r_friend3 = User.objects.get(pk=my_list[-3])
                 friendship  = Friendship1(student = student, friend = r_friend3)
                 friendship.save()
 
 def show_students():
-    number_of_students = Student.objects.all()
-    print(number_of_students[0].id)
+    number_of_students = User.objects.filter(is_staff=False)
     for student in number_of_students:
-        print(student.id)
+        print(student)
     print("Total number:" , number_of_students.count())
     # all_friendships  = Friendship1.objects.all()
     # for friendship in all_friendships:
     #     print(friendship.student.name)
     #     print(friendship.friend.name)
+    print(User.objects.filter(is_staff=False))
 
+def delete_all_friendships():
+    delele_all_friendships = Friendship1.objects.all().delete()
     
 if __name__ =='__main__':
     print('populating script!')
-    add_student(40)
+    # add_student(40)
     # show_students()
     add_friendship()
+    # delete_all_friendships()
     print("Populating complete!")
