@@ -24,6 +24,7 @@ Django
 Server can be accessed in localhost port 8000
 
 # Project built by:
+
 [TJun-Jie](https://github.com/TJun-Jie)
----
+<br />
 [Evande1](https://github.com/Evande1)
