@@ -68,12 +68,13 @@ def get_form(request):
         friendships = Friendship1.objects.filter(student__id = student.id)
         if(len(friendships) > 0):
             dct = {
-                "friend1": friendships[0],
-                "friend2": friendships[1],
-                "friend3": friendships[2]
+                "friend1": friendships[0].friend,
+                "friend2": friendships[1].friend,
+                "friend3": friendships[2].friend
             }
         else:
             dct = {}
+        print(dct)
         form = InputForm(initial=dct)
 
     return render(request, 'forms.html', {'form': form})

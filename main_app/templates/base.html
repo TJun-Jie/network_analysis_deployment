@@ -30,26 +30,27 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'main_app:index' %}">Home <span class="sr-only">(current)</span></a>
             </li>
+
+            {% if request.user.groups.all.0.name == 'admin' %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'main_app:tables' %}">Table</a>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'main_app:graph' %}">Graph</a>
+            {% endif %}
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'main_app:forms' %}">Form <span class="sr-only">(current)</span></a>
             </li>
-            {% if request.user.groups.all.0.name == 'admin' %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+            <li>
+              <a class="nav-link" href="{% url 'main_app:logout' %}">Logout</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'main_app:tables' %}">Table</a>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'main_app:graph' %}">Graph</a>
-            <li class="nav-item">
-            {% endif %}
-              <a class="nav-link" href="{% url 'main_app:register' %}">Register</a>
-            </li>
-            {% if user.is_authenticated %}
-              <li>
-                <a class="nav-link" href="{% url 'main_app:logout' %}">Logout</a>
-              </li>
             {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'main_app:register' %}">Register</a>
+              </li>
               <li>
                 <a class="nav-link" href="{% url 'main_app:user_login' %}">Login</a>
               </li>

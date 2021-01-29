@@ -112,5 +112,5 @@ if __name__ =='__main__':
     # add_friendship()
     # delete_all_friendships()
     # show_friend_with_id(30)
-    # reset_all_password()
+    reset_all_password()
     print("Populating complete!")
