@@ -48,6 +48,10 @@ def get_form(request):
             friend2 = data['friend2']
             friend3 = data['friend3']
 
+            current_friends = Friendship1.objects.filter(student = student)
+            if(current_friends):
+                current_friends.delete()
+
             friendship1 = Friendship1( student = student, friend = friend1)
             friendship1.save()
 
@@ -57,6 +61,7 @@ def get_form(request):
             friendship3 = Friendship1( student = student, friend = friend3)
             friendship3.save()
 
+            
             # ...
 
             # redirect to a new URL:
@@ -66,6 +71,7 @@ def get_form(request):
     else:
         student = request.user
         friendships = Friendship1.objects.filter(student__id = student.id)
+        
         if(len(friendships) > 0):
             dct = {
                 "friend1": friendships[0].friend,
