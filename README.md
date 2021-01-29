@@ -1,5 +1,3 @@
-# django-friends-network-analysis
-
 # Project Name:
 Student Network Analysis
 
