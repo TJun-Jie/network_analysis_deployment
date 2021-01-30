@@ -16,6 +16,8 @@ import random
 def add_friendship():
     all_students = User.objects.filter(is_staff=False)
     first_student_id = all_students[0].id
+    print(all_students)
+    print(first_student_id)
     number_of_students = all_students.count()
     popular_kid_id = first_student_id + 10
     popular_kid = User.objects.get(pk=popular_kid_id)
