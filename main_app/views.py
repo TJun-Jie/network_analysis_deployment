@@ -15,7 +15,6 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-image_bytes = create_graph()
 
 def index(request):
     return render(request, 'index.html')
@@ -24,12 +23,15 @@ def index(request):
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def graph(request):
+    image_bytes = create_graph()
     number_of_students = User.objects.filter(is_staff=False).count()
     number_of_friendship_links = Friendship1.objects.all().count()
     number_of_friends = {}
-    most_popular_student = get_most_popular_student()
-    print(most_popular_student)
-    context_dict = { 'data' : image_bytes, 'number_of_students': number_of_students, 'number_of_friendship_links': number_of_friendship_links, "most_popular_student_name": most_popular_student.first_name + " " + most_popular_student.last_name}
+    if(number_of_students> 0):
+        most_popular_student = get_most_popular_student()
+        context_dict = { 'data' : image_bytes, 'number_of_students': number_of_students, 'number_of_friendship_links': number_of_friendship_links, "most_popular_student_name": most_popular_student.first_name + " " + most_popular_student.last_name}
+    else:
+        context_dict = { 'data' : image_bytes, 'number_of_students': number_of_students, 'number_of_friendship_links': number_of_friendship_links} 
     return render(request, 'graph.html', context_dict )
 
 

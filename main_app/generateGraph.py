@@ -15,14 +15,13 @@ def db_table_exists(table_name):
 
 def create_graph():   
     if(db_table_exists('main_app_friendship1')):
-        all_students = User.objects.all()
+        all_students = User.objects.filter(is_staff=False)
         all_friendships  = Friendship1.objects.all()
 
         G = nx.DiGraph()
 
         for student in all_students:
-            if( not student.groups.filter(name="admin").exists()):
-                G.add_node(student.id)
+            G.add_node(student.id)
         for friendship in all_friendships:
             G.add_edge(friendship.student.id, friendship.friend.id)
 

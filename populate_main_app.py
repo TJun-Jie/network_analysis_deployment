@@ -20,7 +20,7 @@ def add_student(N=10):
         fake_username = fake_firstname[:2]+fake_lastname[:-2]
         fake_pass= 'Junjie2000'
 
-        users = User.objects.get_or_create(username=fake_username,first_name=fake_firstname,last_name=fake_lastname)[0]
+        users = User.objects.create_user(username=fake_username,first_name=fake_firstname,last_name=fake_lastname)
         u=User.objects.get(username=fake_username)
         u.set_password(fake_pass)
         u.save()
@@ -32,7 +32,7 @@ def add_friendship():
     all_students = User.objects.filter(is_staff=False)
     first_student_id = all_students[0].id
     number_of_students = all_students.count()
-
+    print(first_student_id)
     popular_kid_id = first_student_id + 10
     popular_kid = User.objects.get(pk=popular_kid_id)
 
@@ -93,6 +93,7 @@ def show_students():
 
 def delete_all_friendships():
     delele_all_friendships = Friendship1.objects.all().delete()
+    User.objects.filter(is_staff=False).delete()
     
     
 
