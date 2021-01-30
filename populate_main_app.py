@@ -107,10 +107,10 @@ def reset_all_password():
         entry.save()
 if __name__ =='__main__':
     print('populating script!')
-    # add_student(40)
+    add_student(40)
     # show_students()
-    # add_friendship()
+    add_friendship()
     # delete_all_friendships()
     # show_friend_with_id(30)
-    reset_all_password()
+    # reset_all_password()
     print("Populating complete!")
