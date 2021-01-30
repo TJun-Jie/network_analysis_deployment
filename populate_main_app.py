@@ -22,7 +22,7 @@ def add_student(N=10):
 
         users = User.objects.get_or_create(username=fake_username,first_name=fake_firstname,last_name=fake_lastname)[0]
         u=User.objects.get(username=fake_username)
-        u=set_password(fake_pass)
+        u.set_password(fake_pass)
         u.save()
         
 # seed to add 2 friends for each student while selecting a popular kid
