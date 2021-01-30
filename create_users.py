@@ -6,7 +6,7 @@ fakegen = Faker()
 import django
 django.setup()
 from django.contrib.auth.models import User
-def add_student(N=10):
+def add_student(N=30):
     for entry in range(N):
         fake_firstname = fakegen.first_name()
         fake_lastname = fakegen.last_name()
@@ -20,5 +20,5 @@ def add_student(N=10):
         
 if __name__ == "__main__":
     print("adding student")
-    add_student()
+    add_student(30)
     print("completed adding student")
