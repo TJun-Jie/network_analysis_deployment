@@ -29,7 +29,7 @@ SECRET_KEY = '*d)gky6@j^&j1ug5&56%h(6sfdst&%y#bqal5r#_x3_*b3b%nv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['network-analysis-class-dev2.ap-southeast-1.elasticbeanstalk.com', 'network-analysis-class-dev.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
+ALLOWED_HOSTS = ['network-analysis-class-dev2.ap-southeast-1.elasticbeanstalk.com', 'network-analysis-class-dev.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1', '172.31.26.232']
 LOGIN_URL = "/user_login"
 
 # Application definition
