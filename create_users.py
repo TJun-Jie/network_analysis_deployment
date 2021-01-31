@@ -13,10 +13,7 @@ def add_student(N=30):
         fake_username = fake_firstname[:2]+fake_lastname[:-2]
         fake_pass= 'Junjie2000'
 
-        users = User.objects.create_user(username=fake_username,first_name=fake_firstname,last_name=fake_lastname)
-        u=User.objects.get(username=fake_username)
-        u.set_password(fake_pass)
-        u.save()
+        users = User.objects.create_user(username=fake_username,first_name=fake_firstname,last_name=fake_lastname, password=fake_pass)
         
 if __name__ == "__main__":
     print("adding student")
